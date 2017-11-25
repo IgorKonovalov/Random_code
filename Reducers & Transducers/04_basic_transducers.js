@@ -18,5 +18,16 @@ const filter = predicate => reducer => (acc, val) => {
 const isEvenFilter = filter(evenOnly)
 const notTwoFilter = filter(val => val !== 2)
 const doubleTheMap = map(doubleTheNumber)
+;[1, 2, 3, 4, 5, 6].reduce(
+  notTwoFilter(isEvenFilter(doubleTheMap(pushReducer))),
+  []
+) /*?*/
 
-;[1, 2, 3, 4, 5, 6].reduce(doubleTheMap(notTwoFilter(pushReducer)), []) /*?*/
+const compose = (...functions) =>
+  functions.reduce(
+    (accumulation, fn) => (...args) => accumulation(fn(...args)),
+    x => x
+  )
+
+const numbersMagic = compose(notTwoFilter, isEvenFilter, doubleTheMap)
+;[1, 2, 3, 4, 5, 6].reduce(numbersMagic(pushReducer), []) /*?*/
