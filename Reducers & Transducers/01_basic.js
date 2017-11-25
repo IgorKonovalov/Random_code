@@ -13,5 +13,5 @@ const toUpper = str => str.toUpperCase()
 
 const shout = str => `${str}!!`
 
-const scream = str => toUpper(shout(str)) // compose them
+const scream = str => toUpper(shout(str)) // can be composed as returns same type (str)
 
